@@ -21,6 +21,9 @@ campusswap-bot = "campusswap_bot.__main__:main"
 [tool.setuptools.packages.find]
 include = ["campusswap_bot*"]
 
+[tool.setuptools.package-data]
+campusswap_bot = ["assets/*.png"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 filterwarnings = ["ignore:.*per_message.*:telegram.warnings.PTBUserWarning"]

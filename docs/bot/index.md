@@ -5,11 +5,14 @@ The CampusSwap bot is a working version of the product inside Telegram, where st
 !!! tip "Why a bot first?"
     It's the fastest way to test the idea with real people (a Lean UX experiment): no app store, no install, and it runs on your laptop with one config file.
 
+Try it: [@campusswap_bot](https://t.me/campusswap_bot). It answers only while the bot is running on the host computer.
+
 ## Features
 
 | Feature | In the bot |
 |---|---|
-| Onboarding | `/start`, optional university email check, choose dorm building |
+| Onboarding | `/start` with a welcome cover image, optional university email check, choose dorm building |
+| Bot profile | Name, About, intro description, profile photo, `/` command suggestions and a Menu button (`--setup-profile`) |
 | Post an item | Photo (optional), title, category, condition, Free / Swap / Sell + price, pickup spot, up to 4 time slots, preview and publish |
 | Browse | One card at a time, items from your building first; filter by category or free only |
 | Request | Pick one of the owner's time slots; owner gets your name, building and rating |

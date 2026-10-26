@@ -5,30 +5,20 @@ from __future__ import annotations
 import logging
 import warnings
 
-from telegram import BotCommand, Update
+from telegram import Bot, Update
 from telegram.ext import Application, ContextTypes
 from telegram.warnings import PTBUserWarning
 
 from .config import Config
 from .db import Database
 from .handlers import account, browse, exchange, onboarding, post
+from .profile import apply_commands
 
 log = logging.getLogger(__name__)
 
 # Conversations mix message and button steps on purpose; PTB warns about per_message tracking.
 warnings.filterwarnings("ignore", message=r".*per_message.*", category=PTBUserWarning)
 
-COMMANDS = [
-    BotCommand("start", "Set up or open the menu"),
-    BotCommand("browse", "Browse items"),
-    BotCommand("post", "Post an item"),
-    BotCommand("myitems", "Items you posted"),
-    BotCommand("myrequests", "Items you requested"),
-    BotCommand("profile", "Your rating and stats"),
-    BotCommand("building", "Change your dorm building"),
-    BotCommand("help", "How CampusSwap works"),
-    BotCommand("cancel", "Cancel the current step"),
-]
 
 
 async def _on_error(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -41,13 +31,15 @@ async def _on_error(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def _post_init(app: Application) -> None:
-    await app.bot.set_my_commands(COMMANDS)
+    await apply_commands(app.bot)
     me = await app.bot.get_me()
     log.info("CampusSwap bot is running as @%s. Press Ctrl+C to stop.", me.username)
 
 
-def build_application(config: Config) -> Application:
-    app = Application.builder().token(config.token).post_init(_post_init).build()
+def build_application(config: Config, bot: Bot | None = None) -> Application:
+    builder = Application.builder().post_init(_post_init)
+    builder = builder.bot(bot) if bot is not None else builder.token(config.token)
+    app = builder.build()
     app.bot_data["config"] = config
     app.bot_data["db"] = Database(config.database)
 

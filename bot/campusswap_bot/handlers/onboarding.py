@@ -6,6 +6,7 @@ from telegram import Update
 from telegram.ext import CallbackQueryHandler, CommandHandler, ContextTypes, ConversationHandler, MessageHandler, filters
 
 from .. import keyboards, texts
+from ..profile import WELCOME_IMAGE
 from .common import cfg, db, is_onboarded, require_user, send_menu
 
 EMAIL, BUILDING = range(2)
@@ -18,12 +19,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if is_onboarded(user, config):
         await send_menu(update, texts.READY.format(name=tg.first_name))
         return ConversationHandler.END
-    await update.message.reply_html(texts.WELCOME)
+    await _send_welcome(update, context)
     if config.require_email and not user.email:
         await update.message.reply_html(texts.ASK_EMAIL.format(domains=texts.domains_text(config.university_email_domains)))
         return EMAIL
     await update.message.reply_html(texts.ASK_BUILDING, reply_markup=keyboards.buildings(config.buildings))
     return BUILDING
+
+
+async def _send_welcome(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Welcome card with the cover image. Upload once, then reuse Telegram's file_id."""
+    cached = context.bot_data.get("welcome_file_id")
+    if cached:
+        await update.message.reply_photo(cached, caption=texts.WELCOME, parse_mode="HTML")
+        return
+    with WELCOME_IMAGE.open("rb") as f:
+        msg = await update.message.reply_photo(f, caption=texts.WELCOME, parse_mode="HTML")
+    if msg.photo:
+        context.bot_data["welcome_file_id"] = msg.photo[-1].file_id
 
 
 async def email(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:

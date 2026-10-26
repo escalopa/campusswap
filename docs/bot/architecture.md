@@ -20,6 +20,8 @@ bot/
 │   ├── config.py        # loads and validates config.toml
 │   ├── db.py            # SQLite schema and data access (users, items, requests, ratings)
 │   ├── keyboards.py     # inline and reply keyboards
+│   ├── profile.py       # bot name, descriptions, command suggestions, menu button, photo
+│   ├── assets/          # avatar.png (profile photo), welcome.png (/start cover)
 │   ├── texts.py         # message texts and pure helpers (parsing, formatting, validation)
 │   └── handlers/
 │       ├── common.py     # shared helpers: db/config access, "must /start first" guard
@@ -28,7 +30,8 @@ bot/
 │       ├── browse.py     # browsing cards and filters
 │       ├── exchange.py   # request → accept/decline → handover → rating
 │       └── account.py    # my items, my requests, profile, help
-├── tests/               # pytest: config, database, texts, app wiring
+├── assets-src/          # HTML sources for the images (render with headless Chrome)
+├── tests/               # pytest: unit tests + end-to-end flows with a fake Telegram API
 ├── config.example.toml
 └── pyproject.toml
 ```

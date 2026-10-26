@@ -55,6 +55,24 @@ You should see `CampusSwap bot is running as @your_bot_username`. Open the bot i
 
 Stop it with ++ctrl+c++. Data stays in `campusswap.db`; delete that file to start fresh.
 
+## 6. Set up the bot's profile (once)
+
+```bash
+python -m campusswap_bot --config config.toml --setup-profile
+```
+
+This sets everything Telegram shows about the bot, then exits:
+
+| What | Where users see it |
+|---|---|
+| Name: *CampusSwap* | Chat list and chat header |
+| Short description (About) | Bot profile and shared links |
+| Description | Empty chat, before tapping **Start** |
+| 9 command suggestions | When typing `/`, and in the **Menu** button |
+| Profile photo | Chat list and profile (`campusswap_bot/assets/avatar.png`) |
+
+Add `--no-photo` to skip re-uploading the photo. The texts live in `campusswap_bot/profile.py`; the images are generated from `assets-src/*.html`. Command suggestions are also refreshed every time the bot starts.
+
 ## Testing with two accounts
 
 Exchanges need two people. Test with a friend, or use a second Telegram account: post an item from one account, request it from the other, accept, hand over and rate.
@@ -65,6 +83,8 @@ Exchanges need two people. Test with a friend, or use a second Telegram account:
 pip install -e ".[dev]"
 pytest
 ```
+
+Besides unit tests, `tests/test_flows.py` runs whole conversations through the real handlers with Telegram's API replaced by a fake: two students onboard, post, browse, request, accept or decline, cancel, hand over and rate. No token or network is needed.
 
 ## Troubleshooting
 
