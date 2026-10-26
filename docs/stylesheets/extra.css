@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap");
+:root {
+  --md-primary-fg-color: #1E7B5C;
+  --md-primary-fg-color--light: #DDF1E8;
+  --md-primary-fg-color--dark: #145640;
+  --md-accent-fg-color: #E0A800;
+}
+.md-typeset h1, .md-typeset h2, .md-typeset h3 { font-family: "Space Grotesk", "DM Sans", sans-serif; font-weight: 700; }
+.md-typeset .grid.cards > ul > li { border-radius: 14px; }
+.swatch { display: inline-block; width: 1em; height: 1em; border-radius: 4px; vertical-align: -0.15em; border: 1px solid #D5D8DD; margin-right: .3em; }

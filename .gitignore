@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Bot secrets and local data
+bot/config.toml
+*.db
+*.db-journal
+
+# Docs build output
+site/
+
+# OS
+.DS_Store

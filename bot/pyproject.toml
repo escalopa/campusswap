@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "campusswap-bot"
+version = "0.1.0"
+description = "CampusSwap Telegram bot: students give away, swap and sell dorm items with built-in pickup."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Ahmed Helaly" }]
+dependencies = ["python-telegram-bot>=21.6,<23"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+campusswap-bot = "campusswap_bot.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["campusswap_bot*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore:.*per_message.*:telegram.warnings.PTBUserWarning"]

@@ -1,0 +1,86 @@
+site_name: CampusSwap
+site_description: A campus-only app for students to give away, swap and sell dorm items — UX/UI case study and Telegram bot.
+site_author: Ahmed Helaly
+site_url: https://escalopa.github.io/campusswap/
+repo_url: https://github.com/escalopa/campusswap
+repo_name: escalopa/campusswap
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2026 Ahmed Helaly
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: amber
+      toggle: { icon: material/weather-night, name: Switch to dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: amber
+      toggle: { icon: material/weather-sunny, name: Switch to light mode }
+  font:
+    text: DM Sans
+    code: JetBrains Mono
+  icon:
+    logo: material/swap-horizontal-circle
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight: { anchor_linenums: true }
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist: { custom_checkbox: true }
+  - pymdownx.tabbed: { alternate_style: true }
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Product:
+      - product/index.md
+      - Research: product/research.md
+      - Design: product/design.md
+      - Roadmap & tracker: product/roadmap.md
+  - Concepts:
+      - concepts/index.md
+      - The UX process: concepts/process.md
+      - UX/UI glossary: concepts/ux-glossary.md
+      - Figma basics: concepts/figma.md
+      - Tech glossary: concepts/tech-glossary.md
+  - Telegram bot:
+      - bot/index.md
+      - Run it locally: bot/setup.md
+      - How students use it: bot/user-guide.md
+      - Architecture: bot/architecture.md
+  - Course:
+      - course/index.md
+      - Exam preparation: course/exam-prep.md

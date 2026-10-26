@@ -1,0 +1,24 @@
+# CampusSwap bot configuration.
+# Copy this file to config.toml (which git ignores) and fill in your values:
+#   cp config.example.toml config.toml
+
+[telegram]
+# Bot token from @BotFather. Keep it secret: never commit config.toml.
+token = "PASTE_YOUR_BOT_TOKEN_HERE"
+
+[app]
+# SQLite file, relative to this config file.
+database = "campusswap.db"
+
+# Dorm buildings students can choose from. Items from the student's own building are shown first.
+buildings = ["Building 1", "Building 2", "Building 3", "Building 4"]
+
+# Item categories shown when posting and browsing.
+categories = ["Kitchen", "Lamps & electronics", "Furniture & storage", "Bedding", "Books", "Sports", "Clothes", "Other"]
+
+# If set, students must enter an email ending with one of these domains during /start.
+# The bot only checks the format; it does not send a confirmation email. Leave empty to skip this step.
+university_email_domains = []
+
+# Maximum pickup time slots per item (1–8).
+max_slots = 4
