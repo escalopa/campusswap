@@ -44,7 +44,7 @@ Status as of 2 November 2026. The same tracker is in the [project guide PDF](../
 
 ### Case study and submission
 
-- [ ] Import the deck into Google Slides and check the layout
+- [x] Import the deck into [Google Slides](https://docs.google.com/presentation/d/118UVpU_nEm3OP0KZgbS7O5V0DsFyDCYGhPjINbZ9dK4/edit?usp=sharing) and check the layout
 - [ ] Fill findings, test results, key learnings, About me and timeline
 - [x] Add hi-fi screenshots, prototype link and QR code
 - [x] Link the deck in the Figma file (section 04)

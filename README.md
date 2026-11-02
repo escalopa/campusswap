@@ -10,7 +10,7 @@ A campus-only app where students give away, swap or sell dorm items, and agree o
 [![Bot tests](https://github.com/escalopa/campusswap/actions/workflows/bot-tests.yml/badge.svg)](https://github.com/escalopa/campusswap/actions/workflows/bot-tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1E7B5C.svg)](LICENSE)
 
-[Documentation](https://escalopa.github.io/campusswap/) · [Prototype](https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144) · [Figma design](https://www.figma.com/design/FBkfowqM4rI8lcgZ8fuzQv) · [Case study deck](docs/assets/campusswap-case-study.pptx) · [Project guide (PDF)](docs/assets/campusswap-project-guide.pdf)
+[Documentation](https://escalopa.github.io/campusswap/) · [Presentation](https://docs.google.com/presentation/d/118UVpU_nEm3OP0KZgbS7O5V0DsFyDCYGhPjINbZ9dK4/edit?usp=sharing) · [Prototype](https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144) · [Figma design](https://www.figma.com/design/FBkfowqM4rI8lcgZ8fuzQv) · [Project guide (PDF)](docs/assets/campusswap-project-guide.pdf)
 
 </div>
 
@@ -35,7 +35,7 @@ This repository is the course project for **UX/UI for Startups** and contains:
 | 📚 Documentation site | <https://escalopa.github.io/campusswap/> |
 | 🎨 Figma design file | <https://www.figma.com/design/FBkfowqM4rI8lcgZ8fuzQv> |
 | 📱 Clickable prototype | <https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144> |
-| 📊 Case study presentation | Google Slides: *coming soon* · [PowerPoint version](docs/assets/campusswap-case-study.pptx) |
+| 📊 Case study presentation | [Google Slides](https://docs.google.com/presentation/d/118UVpU_nEm3OP0KZgbS7O5V0DsFyDCYGhPjINbZ9dK4/edit?usp=sharing) · [PowerPoint version](docs/assets/campusswap-case-study.pptx) |
 | 📄 Project guide (PDF) | [docs/assets/campusswap-project-guide.pdf](docs/assets/campusswap-project-guide.pdf) |
 | 📄 Research plan (PDF) | [docs/assets/campusswap-research-plan.pdf](docs/assets/campusswap-research-plan.pdf) |
 
