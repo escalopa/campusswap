@@ -50,10 +50,11 @@ This site documents the project end to end: the product and its research, the UX
 | What | Link | Notes |
 |---|---|---|
 | Figma design file | [CampusSwap — UX/UI for Startups](https://www.figma.com/design/FBkfowqM4rI8lcgZ8fuzQv) | Research, lo-fi, hi-fi and case study sections in one file |
+| Clickable prototype | [Hi-Fi prototype](https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144) | The full "get an item" flow plus posting |
 | Case study presentation | Google Slides link: *coming soon* · [PowerPoint version](assets/campusswap-case-study.pptx) | 17 slides with speaker notes |
 | Project guide (PDF) | [campusswap-project-guide.pdf](assets/campusswap-project-guide.pdf) | Process, glossary, status and tracker in 8 pages |
 | Research plan (PDF) | [campusswap-research-plan.pdf](assets/campusswap-research-plan.pdf) | Goals, methods, recruiting, interview guide, survey |
 | Source code | [github.com/escalopa/campusswap](https://github.com/escalopa/campusswap) | Telegram bot (Python) and this documentation |
 
 !!! info "Status"
-    The research materials, lo-fi prototype, style guide and pattern library are built. Interviews, usability tests and the final hi-fi screens are in progress. See the [roadmap and tracker](product/roadmap.md).
+    The research materials, lo-fi prototype, style guide and pattern library are built. The hi-fi screens and clickable prototype are done. Interviews and usability tests are in progress. See the [roadmap and tracker](product/roadmap.md).

@@ -88,6 +88,8 @@ iPhone 14 size (390 × 844), built only from the style guide and pattern library
 2. Home (free near you, categories)
 3. Item details (photo, FREE tag, giver card, pickup info)
 4. Chat and pickup (choose a time slot)
-5. Pickup confirmed *(in progress)*
-6. Handover and rating *(in progress)*
-7. Post an item *(in progress)*
+5. Pickup confirmed
+6. Handover and rating
+7. Post an item
+
+**[Open the clickable prototype](https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144)** (Figma flow *Hi-Fi prototype*): sign up → home → item details → chat and pickup → pickup confirmed → rating → home. The Post tab opens "Post an item".

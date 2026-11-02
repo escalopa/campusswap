@@ -1,6 +1,6 @@
 # Roadmap and tracker
 
-Status as of 26 October 2026. The same tracker is in the [project guide PDF](../assets/campusswap-project-guide.pdf).
+Status as of 2 November 2026. The same tracker is in the [project guide PDF](../assets/campusswap-project-guide.pdf).
 
 ## What's built
 
@@ -13,10 +13,10 @@ Status as of 26 October 2026. The same tracker is in the [project guide PDF](../
 | User flows, Crazy 8s slots, 4 clickable lo-fi screens | :material-check-circle:{ style="color:#1E7B5C" } Done (sketches pending) |
 | Idea brief, usability study guide, moodboard | :material-check-circle:{ style="color:#1E7B5C" } Done |
 | Style guide and pattern library (components) | :material-check-circle:{ style="color:#1E7B5C" } Done |
-| Hi-fi screens 1–4 | :material-check-circle:{ style="color:#1E7B5C" } Built |
-| Hi-fi screens 5–7, hi-fi prototype links | :material-progress-clock:{ style="color:#E0A800" } Waiting on Figma plan limit |
-| Case study deck | :material-check-circle:{ style="color:#1E7B5C" } Draft with marked gaps |
-| Telegram bot | :material-check-circle:{ style="color:#1E7B5C" } MVP done, runs locally |
+| Hi-fi screens 1–7 and [clickable prototype](https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144) | :material-check-circle:{ style="color:#1E7B5C" } Done |
+| Case study section in Figma (links, QR code, slide outline) | :material-check-circle:{ style="color:#1E7B5C" } Done |
+| Case study deck | :material-check-circle:{ style="color:#1E7B5C" } Draft with hi-fi screens and QR; research gaps marked |
+| Telegram bot [@campusswap_bot](https://t.me/campusswap_bot) | :material-check-circle:{ style="color:#1E7B5C" } MVP done, profile set up, runs locally |
 | Documentation site | :material-check-circle:{ style="color:#1E7B5C" } Done |
 
 ## What's left
@@ -37,7 +37,7 @@ Status as of 26 October 2026. The same tracker is in the [project guide PDF](../
 
 ### Hi-fi
 
-- [ ] Finish hi-fi screens 5–7 and wire the hi-fi prototype
+- [x] Finish hi-fi screens 5–7 and wire the hi-fi prototype
 - [ ] Run 2–5 usability tests
 - [ ] Update user flow v2.0 and screens from test results
 - [ ] Paste moodboard screenshots
@@ -46,13 +46,13 @@ Status as of 26 October 2026. The same tracker is in the [project guide PDF](../
 
 - [ ] Import the deck into Google Slides and check the layout
 - [ ] Fill findings, test results, key learnings, About me and timeline
-- [ ] Add hi-fi screenshots, prototype link and QR code
-- [ ] Put the deck into the Figma file (section 04)
+- [x] Add hi-fi screenshots, prototype link and QR code
+- [x] Link the deck in the Figma file (section 04)
 - [ ] Share Figma and Slides as "Anyone with the link can view"; save a `.fig` copy; export the deck as PDF
 - [ ] Rehearse: 25-minute run-through with a live prototype demo
 
 ### Telegram bot (optional)
 
-- [ ] Create a bot with @BotFather and run it locally
+- [x] Create a bot with @BotFather and run it locally
 - [ ] Test with 3–5 students for a week and record usage numbers for the case study
 - [ ] Later: "wanted" alerts, email verification by code, hosting on Google Cloud Run
