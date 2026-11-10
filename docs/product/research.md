@@ -42,6 +42,10 @@ Out of scope: payments, delivery services, selling outside the university.
     - **Criteria:** campus-only audience, search, visibility, trust, pickup, alerts, fees
     - **Result:** see the [competitive landscape](index.md#competitive-landscape)
 
+## Forms and data
+
+The screener and survey are Google Forms created by [`research/forms/create_research_workspace.gs`](https://github.com/escalopa/campusswap/blob/main/research/forms/create_research_workspace.gs). Both answer into one spreadsheet, **CampusSwap — Research data**, which also has tabs for participants, interview notes (one idea per row) and usability tests. [`research/analyze_survey.py`](https://github.com/escalopa/campusswap/blob/main/research/analyze_survey.py) turns the CSV exports into a summary with counts, percentages and charts for the report.
+
 ## Recruiting criteria
 
 - **Must:** current student living in the dorms for at least one semester, who exchanged (or threw away) an item in the last 12 months

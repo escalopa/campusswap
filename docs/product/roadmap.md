@@ -1,6 +1,6 @@
 # Roadmap and tracker
 
-Status as of 2 November 2026. The same tracker is in the [project guide PDF](../assets/campusswap-project-guide.pdf).
+Status as of 10 November 2026. The same tracker is in the [project guide PDF](../assets/campusswap-project-guide.pdf).
 
 ## What's built
 
@@ -19,11 +19,33 @@ Status as of 2 November 2026. The same tracker is in the [project guide PDF](../
 | Telegram bot [@campusswap_bot](https://t.me/campusswap_bot) | :material-check-circle:{ style="color:#1E7B5C" } MVP done, profile set up, runs locally |
 | Documentation site | :material-check-circle:{ style="color:#1E7B5C" } Done |
 
+## Rubric coverage (exam: 28 November 2026)
+
+Status of every graded item. **Ready** means built and needs nothing more; **needs data** means the frame or slide is built but must be filled from real interviews or tests.
+
+| Assignment | Item | Status |
+|---|---|---|
+| UX Research | A Research plan, interview guide, survey | Ready |
+| | B Research report (summary, ≥2 key findings, recommendations, appendix) | Needs data: interviews + survey (by 15 Nov) |
+| | C Rough design with annotations | Ready; add a photo of a hand sketch and the research link |
+| Lo-Fi | A.1 Interview notes · A.2 Themes and HMW | Needs data: interviews |
+| | A.3 Feature ideation (15 ideas) · A.4 Prioritization | Ready; confirm the reasons after synthesis |
+| | B.1 User flow · B.3 Lo-fi clickable wireframes | Ready |
+| | B.2 Crazy 8s paper sketches | Needs you: draw and photograph |
+| Hi-Fi | A.1 Idea brief · A.2 Usability study guide | Ready |
+| | A.3 User flow v2.0 | Needs data: 2–5 usability tests (by 21 Nov) |
+| | B.1 Moodboard | Needs screenshots pasted |
+| | B.2 Style guide · B.3 Pattern library · B.4 7 hi-fi screens + prototype | Ready |
+| Case study | Figma file (online + `.fig`) | Ready; share the link and save the `.fig` copy |
+| | Presentation (Google Slides) | Ready except findings, test results, key learnings, About me |
+| | Live demo of the full flow | Ready: Figma flow *Hi-Fi prototype*, plus the live Telegram bot |
+
 ## What's left
 
 ### Research
 
-- [ ] Create the screener and survey in Google Forms
+- [x] Write the forms script ([`research/forms`](https://github.com/escalopa/campusswap/tree/main/research))
+- [ ] Run it once to create the screener, survey and research spreadsheet
 - [ ] Post the recruiting message in dorm and course chats
 - [ ] Run 5–6 interviews
 - [ ] Collect 30+ survey responses
@@ -51,8 +73,10 @@ Status as of 2 November 2026. The same tracker is in the [project guide PDF](../
 - [ ] Share Figma and Slides as "Anyone with the link can view"; save a `.fig` copy; export the deck as PDF
 - [ ] Rehearse: 25-minute run-through with a live prototype demo
 
-### Telegram bot (optional)
+### Telegram bot
 
 - [x] Create a bot with @BotFather and run it locally
 - [ ] Test with 3–5 students for a week and record usage numbers for the case study
-- [ ] Later: "wanted" alerts, email verification by code, hosting on Google Cloud Run
+- [x] Cloud Run + Firestore deployment code, tested against a real Firestore database
+- [ ] Deploy with `bot/deploy/deploy.sh` (see [Deploy to Google Cloud](../bot/deploy.md))
+- [ ] Later: "wanted" alerts, email verification by code

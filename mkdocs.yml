@@ -81,6 +81,7 @@ nav:
       - Run it locally: bot/setup.md
       - How students use it: bot/user-guide.md
       - Architecture: bot/architecture.md
+      - Deploy to Google Cloud: bot/deploy.md
   - Course:
       - course/index.md
       - Exam preparation: course/exam-prep.md

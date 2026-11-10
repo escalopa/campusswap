@@ -36,6 +36,8 @@ This repository is the course project for **UX/UI for Startups** and contains:
 | 🎨 Figma design file | <https://www.figma.com/design/FBkfowqM4rI8lcgZ8fuzQv> |
 | 📱 Clickable prototype | <https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144> |
 | 📊 Case study presentation | [Google Slides](https://docs.google.com/presentation/d/118UVpU_nEm3OP0KZgbS7O5V0DsFyDCYGhPjINbZ9dK4/edit?usp=sharing) · [PowerPoint version](docs/assets/campusswap-case-study.pptx) |
+| 🤖 Telegram bot | <https://t.me/campusswap_bot> |
+| 📝 Research forms | Created by [`research/forms`](research/forms/create_research_workspace.gs); links in the research spreadsheet |
 | 📄 Project guide (PDF) | [docs/assets/campusswap-project-guide.pdf](docs/assets/campusswap-project-guide.pdf) |
 | 📄 Research plan (PDF) | [docs/assets/campusswap-research-plan.pdf](docs/assets/campusswap-research-plan.pdf) |
 
@@ -60,7 +62,7 @@ cp config.example.toml config.toml   # then paste your token from @BotFather
 python -m campusswap_bot --config config.toml
 ```
 
-See [Run the bot locally](https://escalopa.github.io/campusswap/bot/setup/) for the full guide and [Architecture](https://escalopa.github.io/campusswap/bot/architecture/) for how it works.
+See [Run the bot locally](https://escalopa.github.io/campusswap/bot/setup/), [Deploy to Google Cloud](https://escalopa.github.io/campusswap/bot/deploy/) (Cloud Run + Firestore) and [Architecture](https://escalopa.github.io/campusswap/bot/architecture/) for how it works.
 
 ## Repository structure
 
@@ -70,6 +72,7 @@ See [Run the bot locally](https://escalopa.github.io/campusswap/bot/setup/) for 
 │   ├── campusswap_bot/     # source code
 │   ├── tests/              # pytest suite
 │   └── config.example.toml # copy to config.toml (git-ignored)
+├── research/               # Google Forms script and survey analysis
 ├── docs/                   # documentation site (MkDocs Material)
 │   ├── assets/             # PDFs and the presentation
 │   ├── product/            # problem, research, design, roadmap
