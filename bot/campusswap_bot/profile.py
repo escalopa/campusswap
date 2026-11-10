@@ -47,12 +47,12 @@ async def apply_commands(bot: Bot) -> None:
     await bot.set_chat_menu_button(menu_button=MenuButtonCommands())
 
 
-async def apply_profile(bot: Bot, with_photo: bool = True) -> list[str]:
+async def apply_profile(bot: Bot, with_photo: bool = True, name: str = NAME) -> list[str]:
     """Set everything Telegram shows about the bot. Only changes what differs (setMyName is rate-limited)."""
     done: list[str] = []
-    if (await bot.get_my_name()).name != NAME:
-        await bot.set_my_name(NAME)
-        done.append(f"name → {NAME}")
+    if (await bot.get_my_name()).name != name:
+        await bot.set_my_name(name)
+        done.append(f"name → {name}")
     if (await bot.get_my_short_description()).short_description != SHORT_DESCRIPTION:
         await bot.set_my_short_description(SHORT_DESCRIPTION)
         done.append("short description (About) updated")

@@ -1,0 +1,74 @@
+name: Deploy bot
+
+# Every push to main that changes bot/ deploys to TEST (@campusswap_test_bot).
+# PROD (@campusswap_bot) deploys only by hand: Actions → Deploy bot → Run workflow → prod.
+on:
+  push:
+    branches: [main]
+    paths: ["bot/**"]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Where to deploy
+        type: choice
+        options: [test, prod]
+        default: test
+
+permissions:
+  contents: read
+  id-token: write   # keyless auth to Google Cloud (Workload Identity Federation)
+
+concurrency:
+  group: deploy-${{ github.event.inputs.environment || 'test' }}
+  cancel-in-progress: false
+
+env:
+  PROJECT: campusswap-infra
+  REGION: europe-west1
+  WIF_PROVIDER: projects/756286244757/locations/global/workloadIdentityPools/github/providers/campusswap-repo
+  DEPLOYER: github-deployer@campusswap-infra.iam.gserviceaccount.com
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: bot } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e ".[dev,cloud]"
+      - run: pytest -q
+
+  deploy:
+    needs: test
+    # Enabled by bot/deploy/setup-iam.sh once Google Cloud permissions exist.
+    if: vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'test' }}
+    defaults: { run: { working-directory: bot } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e .
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOYER }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Deploy to Cloud Run and set the webhook
+        env:
+          PYTHON: python
+        run: ./deploy/deploy.sh "${{ github.event.inputs.environment || 'test' }}"
+      - name: Check the bot token in GitHub matches the one Cloud Run uses
+        env:
+          GH_TOKEN_TEST: ${{ secrets.TELEGRAM_BOT_TOKEN_TEST }}
+          GH_TOKEN_PROD: ${{ secrets.TELEGRAM_BOT_TOKEN_PROD }}
+        run: |
+          ENVIRONMENT="${{ github.event.inputs.environment || 'test' }}"
+          if [ "$ENVIRONMENT" = prod ]; then S=telegram-token; T="$GH_TOKEN_PROD"; else S=telegram-token-test; T="$GH_TOKEN_TEST"; fi
+          if [ "$(gcloud secrets versions access latest --secret "$S" --project "$PROJECT")" = "$T" ]; then
+            echo "Token in Secret Manager matches the GitHub secret."
+          else
+            echo "::warning::GitHub secret differs from Secret Manager ($S). Rotate with: gcloud secrets versions add $S --data-file=-"
+          fi

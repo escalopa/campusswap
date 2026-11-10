@@ -3,6 +3,7 @@
 Secrets can also come from environment variables, which is how the bot runs on Cloud Run:
   CAMPUSSWAP_TOKEN           overrides [telegram].token
   CAMPUSSWAP_WEBHOOK_SECRET  overrides [webhook].secret
+  CAMPUSSWAP_FIRESTORE_DATABASE overrides [storage].firestore_database (prod: "(default)", test: "staging")
 """
 
 from __future__ import annotations
@@ -98,6 +99,7 @@ def load_config(path: str | Path) -> Config:
         max_slots=max_slots,
         backend=backend,
         firestore_project=storage.get("firestore_project") or None,
-        firestore_database=storage.get("firestore_database") or "(default)",
+        firestore_database=os.environ.get("CAMPUSSWAP_FIRESTORE_DATABASE")
+        or storage.get("firestore_database") or "(default)",
         webhook_secret=webhook_secret,
     )

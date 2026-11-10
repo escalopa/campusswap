@@ -19,3 +19,4 @@ site/
 # Research exports (personal data)
 research/*.csv
 research/data/
+bot/config.test.toml

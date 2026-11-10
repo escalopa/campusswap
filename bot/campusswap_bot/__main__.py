@@ -21,6 +21,7 @@ def main() -> int:
     parser.add_argument("--setup-profile", action="store_true",
                         help="set the bot's name, descriptions, commands, menu button and photo, then exit")
     parser.add_argument("--no-photo", action="store_true", help="with --setup-profile: don't upload the profile photo")
+    parser.add_argument("--name", default="CampusSwap", help="with --setup-profile: bot display name")
     parser.add_argument("--set-webhook", metavar="URL",
                         help="point Telegram at a deployed webhook (e.g. https://…run.app/telegram), then exit")
     parser.add_argument("--delete-webhook", action="store_true",
@@ -42,7 +43,7 @@ def main() -> int:
         return 2
 
     if args.setup_profile:
-        return asyncio.run(_setup_profile(config.token, with_photo=not args.no_photo))
+        return asyncio.run(_setup_profile(config.token, with_photo=not args.no_photo, name=args.name))
 
     if args.set_webhook or args.delete_webhook:
         return asyncio.run(_webhook(config, args.set_webhook))
@@ -52,10 +53,10 @@ def main() -> int:
     return 0
 
 
-async def _setup_profile(token: str, with_photo: bool) -> int:
+async def _setup_profile(token: str, with_photo: bool, name: str) -> int:
     async with Bot(token) as bot:
         me = await bot.get_me()
-        for line in await apply_profile(bot, with_photo=with_photo):
+        for line in await apply_profile(bot, with_photo=with_photo, name=name):
             print(f"✓ {line}")
         print(f"Done: https://t.me/{me.username}")
     return 0
