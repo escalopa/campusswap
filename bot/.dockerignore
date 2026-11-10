@@ -1,0 +1,8 @@
+.venv
+*.db
+config.toml
+tests
+assets-src
+**/__pycache__
+*.egg-info
+.pytest_cache

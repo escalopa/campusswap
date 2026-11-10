@@ -166,7 +166,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
-def handlers() -> list:
+def handlers(persistent: bool = False) -> list:
     return [
         ConversationHandler(
             entry_points=[CommandHandler("post", begin), MessageHandler(filters.Regex(f"^{re.escape(texts.BTN_POST)}$"), begin)],
@@ -183,6 +183,7 @@ def handlers() -> list:
             },
             fallbacks=[CommandHandler("cancel", cancel), MessageHandler(MENU_FILTER, cancel)],
             allow_reentry=True,
+            persistent=persistent,
             name="post_item",
         )
     ]

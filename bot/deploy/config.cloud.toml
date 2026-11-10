@@ -1,0 +1,15 @@
+# Configuration baked into the Cloud Run image. Secrets are NOT stored here:
+# CAMPUSSWAP_TOKEN and CAMPUSSWAP_WEBHOOK_SECRET come from Secret Manager as environment variables.
+
+[telegram]
+token = "PASTE_VIA_CAMPUSSWAP_TOKEN_ENV"
+
+[app]
+buildings = ["Building 1", "Building 2", "Building 3", "Building 4"]
+categories = ["Kitchen", "Lamps & electronics", "Furniture & storage", "Bedding", "Books", "Sports", "Clothes", "Other"]
+university_email_domains = []
+max_slots = 4
+
+[storage]
+backend = "firestore"
+firestore_database = "(default)"

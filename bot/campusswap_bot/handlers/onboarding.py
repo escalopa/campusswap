@@ -80,7 +80,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
-def handlers() -> list:
+def handlers(persistent: bool = False) -> list:
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
@@ -89,6 +89,7 @@ def handlers() -> list:
         },
         fallbacks=[CommandHandler("cancel", cancel), CommandHandler("start", start)],
         allow_reentry=True,
+        persistent=persistent,
         name="onboarding",
     )
     return [

@@ -4,8 +4,8 @@ from campusswap_bot.db import Database
 
 
 @pytest.fixture
-def db(tmp_path):
-    d = Database(tmp_path / "t.db")
+def db(make_db):
+    d = make_db()
     d.upsert_user(1, "alice", "Alice")
     d.set_building(1, "Building 1")
     d.upsert_user(2, "bob", "Bob")

@@ -63,11 +63,11 @@ USERS = {
 
 
 class Harness:
-    def __init__(self, tmp_path):
+    def __init__(self, tmp_path, db=None, persistence=None):
         self.bot = FakeBot("123456:TEST")
         self.config = Config(token="123456:TEST", database=tmp_path / "flows.db",
                              buildings=["Building 1", "Building 2", "Building 3"])
-        self.app = build_application(self.config, bot=self.bot)
+        self.app = build_application(self.config, bot=self.bot, db=db, persistence=persistence)
         self.db = self.app.bot_data["db"]
         self._uid = itertools.count(1)
 
@@ -76,11 +76,13 @@ class Harness:
         return self
 
     async def __aexit__(self, *exc):
+        await self.app.update_persistence()
         await self.app.shutdown()
 
     async def _process(self, payload):
         self.bot.calls.clear()
         await self.app.process_update(Update.de_json(payload, self.bot))
+        await self.app.update_persistence()  # same as the Cloud Run webhook server
         return list(self.bot.calls)
 
     async def say(self, who, text):
@@ -166,9 +168,9 @@ async def post_kettle(h):
     await h.tap("bob", "pub:yes")
 
 
-def test_full_exchange(tmp_path):
+def test_full_exchange(tmp_path, make_db):
     async def run():
-        async with Harness(tmp_path) as h:
+        async with Harness(tmp_path, db=make_db()) as h:
             await onboard(h, "bob", 1)    # Building 2
             await onboard(h, "alice", 0)  # Building 1
             await post_lamp(h)
@@ -229,9 +231,9 @@ def test_full_exchange(tmp_path):
     asyncio.run(run())
 
 
-def test_decline_cancel_and_guards(tmp_path):
+def test_decline_cancel_and_guards(tmp_path, make_db):
     async def run():
-        async with Harness(tmp_path) as h:
+        async with Harness(tmp_path, db=make_db()) as h:
             # Not registered yet
             assert "send /start" in texts_to(await h.say("carol", "/browse"), "carol")
 
@@ -281,5 +283,31 @@ def test_email_step(tmp_path, domains, email, ok):
             assert "university email" in texts_to(calls, "alice")
             calls = await h.say("alice", email)
             assert ("Which dorm building" in texts_to(calls, "alice")) is ok
+
+    asyncio.run(run())
+
+
+def test_post_survives_restart(tmp_path, firestore_env):
+    """Cloud Run can stop the instance mid-conversation; the draft and the step must survive."""
+    from campusswap_bot.persistence import FirestorePersistence
+
+    db = firestore_env.db()
+
+    async def run():
+        async with Harness(tmp_path, db=db, persistence=FirestorePersistence(db.client, prefix=db.prefix)) as h:
+            await onboard(h, "bob", 1)
+            await h.say("bob", "/post")
+            await h.say("bob", "/skip")
+            await h.say("bob", "Desk lamp")
+        # new instance, same Firestore
+        async with Harness(tmp_path, db=db, persistence=FirestorePersistence(db.client, prefix=db.prefix)) as h:
+            calls = await h.tap("bob", "cat:1")
+            assert "condition" in texts_to(calls, "bob")
+            await h.tap("bob", "cond:0")
+            await h.tap("bob", "kind:free")
+            await h.tap("bob", "spot:default")
+            await h.say("bob", "Today 18:00")
+            await h.tap("bob", "pub:yes")
+            assert [i.title for i in h.db.items_of(202)] == ["Desk lamp"]
 
     asyncio.run(run())

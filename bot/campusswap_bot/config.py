@@ -1,7 +1,13 @@
-"""Load and validate the bot configuration from a TOML file."""
+"""Load and validate the bot configuration from a TOML file.
+
+Secrets can also come from environment variables, which is how the bot runs on Cloud Run:
+  CAMPUSSWAP_TOKEN           overrides [telegram].token
+  CAMPUSSWAP_WEBHOOK_SECRET  overrides [webhook].secret
+"""
 
 from __future__ import annotations
 
+import os
 import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -17,6 +23,8 @@ DEFAULT_CATEGORIES = [
     "Other",
 ]
 
+BACKENDS = ("sqlite", "firestore")
+
 
 class ConfigError(ValueError):
     """Raised when the configuration file is missing or invalid."""
@@ -30,6 +38,10 @@ class Config:
     categories: list[str] = field(default_factory=lambda: list(DEFAULT_CATEGORIES))
     university_email_domains: list[str] = field(default_factory=list)
     max_slots: int = 4
+    backend: str = "sqlite"
+    firestore_project: str | None = None
+    firestore_database: str = "(default)"
+    webhook_secret: str | None = None
 
     @property
     def require_email(self) -> bool:
@@ -48,7 +60,7 @@ def load_config(path: str | Path) -> Config:
         except tomllib.TOMLDecodeError as e:
             raise ConfigError(f"Invalid TOML in {path}: {e}") from e
 
-    token = str(raw.get("telegram", {}).get("token", "")).strip()
+    token = os.environ.get("CAMPUSSWAP_TOKEN") or str(raw.get("telegram", {}).get("token", "")).strip()
     if not token or token.startswith("PASTE_"):
         raise ConfigError("Set [telegram].token in the config file (get one from @BotFather).")
     if ":" not in token:
@@ -70,6 +82,13 @@ def load_config(path: str | Path) -> Config:
     if not database.is_absolute():
         database = path.parent / database
 
+    storage = raw.get("storage", {})
+    backend = str(storage.get("backend", "sqlite")).strip().lower()
+    if backend not in BACKENDS:
+        raise ConfigError(f"[storage].backend must be one of {', '.join(BACKENDS)}.")
+
+    webhook_secret = os.environ.get("CAMPUSSWAP_WEBHOOK_SECRET") or raw.get("webhook", {}).get("secret") or None
+
     return Config(
         token=token,
         database=database,
@@ -77,4 +96,8 @@ def load_config(path: str | Path) -> Config:
         categories=categories,
         university_email_domains=domains,
         max_slots=max_slots,
+        backend=backend,
+        firestore_project=storage.get("firestore_project") or None,
+        firestore_database=storage.get("firestore_database") or "(default)",
+        webhook_secret=webhook_secret,
     )

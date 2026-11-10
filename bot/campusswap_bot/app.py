@@ -6,7 +6,7 @@ import logging
 import warnings
 
 from telegram import Bot, Update
-from telegram.ext import Application, ContextTypes
+from telegram.ext import Application, BasePersistence, ContextTypes
 from telegram.warnings import PTBUserWarning
 
 from .config import Config
@@ -36,16 +36,36 @@ async def _post_init(app: Application) -> None:
     log.info("CampusSwap bot is running as @%s. Press Ctrl+C to stop.", me.username)
 
 
-def build_application(config: Config, bot: Bot | None = None) -> Application:
+def open_database(config: Config):
+    """SQLite for local runs, Firestore on Cloud Run."""
+    if config.backend == "firestore":
+        from .firestore_db import FirestoreDatabase
+
+        return FirestoreDatabase(project=config.firestore_project, database=config.firestore_database)
+    return Database(config.database)
+
+
+def build_application(
+    config: Config,
+    bot: Bot | None = None,
+    db=None,
+    persistence: BasePersistence | None = None,
+    webhook: bool = False,
+) -> Application:
     builder = Application.builder().post_init(_post_init)
     builder = builder.bot(bot) if bot is not None else builder.token(config.token)
+    if persistence is not None:
+        builder = builder.persistence(persistence)
+    if webhook:
+        builder = builder.updater(None)  # updates arrive through our own HTTP endpoint
     app = builder.build()
     app.bot_data["config"] = config
-    app.bot_data["db"] = Database(config.database)
+    app.bot_data["db"] = db if db is not None else open_database(config)
+    persistent = persistence is not None
 
     # Group 0: conversations (onboarding, posting). Group 1: menu buttons, browsing and exchange buttons.
     # A menu button pressed in the middle of posting cancels the post (group 0) and still opens that menu (group 1).
-    for h in onboarding.handlers() + post.handlers():
+    for h in onboarding.handlers(persistent) + post.handlers(persistent):
         app.add_handler(h, group=0)
     for h in browse.handlers() + exchange.handlers() + account.handlers():
         app.add_handler(h, group=1)
