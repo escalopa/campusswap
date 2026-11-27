@@ -85,3 +85,4 @@ nav:
   - Course:
       - course/index.md
       - Exam preparation: course/exam-prep.md
+      - Exam cheat sheet: course/exam-cheatsheet.md
