@@ -7,6 +7,7 @@ import warnings
 
 from telegram import Bot, Update
 from telegram.ext import Application, BasePersistence, ContextTypes
+from telegram.error import NetworkError
 from telegram.warnings import PTBUserWarning
 
 from .config import Config
@@ -22,6 +23,10 @@ warnings.filterwarnings("ignore", message=r".*per_message.*", category=PTBUserWa
 
 
 async def _on_error(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if isinstance(context.error, NetworkError):
+        # Slow or flaky connection to api.telegram.org: PTB retries polling by itself.
+        log.warning("Telegram network issue (%s); retrying", type(context.error).__name__)
+        return
     log.error("Unhandled error while processing an update", exc_info=context.error)
     if isinstance(update, Update) and update.effective_chat:
         try:
@@ -53,7 +58,15 @@ def build_application(
     webhook: bool = False,
 ) -> Application:
     builder = Application.builder().post_init(_post_init)
-    builder = builder.bot(bot) if bot is not None else builder.token(config.token)
+    if bot is not None:
+        builder = builder.bot(bot)
+    else:
+        # Generous timeouts and a bigger pool: Telegram can be slow to reach on some networks.
+        builder = (
+            builder.token(config.token)
+            .connect_timeout(30).read_timeout(30).write_timeout(30).pool_timeout(30).connection_pool_size(16)
+            .get_updates_connect_timeout(30).get_updates_read_timeout(40).get_updates_pool_timeout(30)
+        )
     if persistence is not None:
         builder = builder.persistence(persistence)
     if webhook:
