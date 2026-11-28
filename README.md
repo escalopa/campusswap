@@ -37,7 +37,7 @@ This repository is the course project for **UX/UI for Startups** and contains:
 | 📱 Clickable prototype | <https://www.figma.com/proto/FBkfowqM4rI8lcgZ8fuzQv/CampusSwap?node-id=10-144&starting-point-node-id=10-144> |
 | 📊 Case study presentation | [Google Slides](https://docs.google.com/presentation/d/118UVpU_nEm3OP0KZgbS7O5V0DsFyDCYGhPjINbZ9dK4/edit?usp=sharing) · [PowerPoint version](docs/assets/campusswap-case-study.pptx) |
 | 🤖 Telegram bot | Prod <https://t.me/campusswap_bot> · Test <https://t.me/campusswap_test_bot> |
-| 📝 Research forms | Created by [`research/forms`](research/forms/create_research_workspace.gs); links in the research spreadsheet |
+| 📝 Survey | <https://docs.google.com/forms/d/e/1FAIpQLSeZqgGGr42lQ_Ph2Kzji2QeW6nCwc-nRKMY6Zw-5VnyHHrCjA/viewform> |
 | 📄 Project guide (PDF) | [docs/assets/campusswap-project-guide.pdf](docs/assets/campusswap-project-guide.pdf) |
 | 📄 Research plan (PDF) | [docs/assets/campusswap-research-plan.pdf](docs/assets/campusswap-research-plan.pdf) |
 

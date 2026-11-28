@@ -26,9 +26,9 @@ Status of every graded item. **Ready** means built and needs nothing more; **nee
 | Assignment | Item | Status |
 |---|---|---|
 | UX Research | A Research plan, interview guide, survey | Ready |
-| | B Research report (summary, ≥2 key findings, recommendations, appendix) | Needs data: interviews + survey (by 15 Nov) |
+| | B Research report (summary, ≥2 key findings, recommendations, appendix) | Needs data: real survey answers (form live) |
 | | C Rough design with annotations | Ready; add a photo of a hand sketch and the research link |
-| Lo-Fi | A.1 Interview notes · A.2 Themes and HMW | Needs data: interviews |
+| Lo-Fi | A.1 Notes · A.2 Themes and HMW | Needs data: survey answers (interviews scoped out) |
 | | A.3 Feature ideation (15 ideas) · A.4 Prioritization | Ready; confirm the reasons after synthesis |
 | | B.1 User flow · B.3 Lo-fi clickable wireframes | Ready |
 | | B.2 Crazy 8s paper sketches | Needs you: draw and photograph |
@@ -45,9 +45,8 @@ Status of every graded item. **Ready** means built and needs nothing more; **nee
 ### Research
 
 - [x] Write the forms script ([`research/forms`](https://github.com/escalopa/campusswap/tree/main/research))
-- [ ] Run it once to create the screener, survey and research spreadsheet
+- [x] Publish the survey ([form](https://docs.google.com/forms/d/e/1FAIpQLSeZqgGGr42lQ_Ph2Kzji2QeW6nCwc-nRKMY6Zw-5VnyHHrCjA/viewform)); interviews scoped out
 - [ ] Post the recruiting message in dorm and course chats
-- [ ] Run 5–6 interviews
 - [ ] Collect 30+ survey responses
 - [ ] Fill interview notes, themes, report and key findings in Figma
 - [ ] Draw a hand sketch of one screen

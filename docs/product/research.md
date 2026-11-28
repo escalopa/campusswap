@@ -22,29 +22,25 @@ Out of scope: payments, delivery services, selling outside the university.
 
 ## Methods
 
-=== "Interviews (primary)"
+Interviews were scoped out to fit the course timeline. Research uses:
 
-    - **Who:** 5–6 dorm residents
-    - **Format:** 20–30 minutes, semi-structured, in person or by call
-    - **Guide:** introduction script, 14 questions (each with its rationale), wrap-up script
-    - **Why:** depth — real stories about past exchanges, motivations and feelings
+=== "Survey (primary)"
 
-=== "Survey (validation)"
+    - **Who:** students living in the dorms
+    - **Format:** anonymous Google Form, 9 questions, about 3 minutes ([open the form](https://docs.google.com/forms/d/e/1FAIpQLSeZqgGGr42lQ_Ph2Kzji2QeW6nCwc-nRKMY6Zw-5VnyHHrCjA/viewform))
+    - **Covers:** behavior (Q1–3), pain points (Q4–5), trust (Q6), value (Q7–8), open ideas (Q9)
+    - **Status:** live. The first 22 submissions were test entries used to check the form and the analysis script, and are excluded from results.
 
-    - **Who:** 30+ dorm residents
-    - **Format:** Google Forms, about 5 minutes, anonymous
-    - **Questions:** 13, multiple choice, Likert scales, ranking and one open question
-    - **Why:** shows how common each behavior and pain point is
-
-=== "Competitive analysis (supporting)"
+=== "Competitive analysis"
 
     - **What:** Telegram dorm chats, Avito, VK groups, campus free shelves
     - **Criteria:** campus-only audience, search, visibility, trust, pickup, alerts, fees
     - **Result:** see the [competitive landscape](index.md#competitive-landscape)
 
-## Forms and data
+=== "Usability test"
 
-The screener and survey are Google Forms created by [`research/forms/create_research_workspace.gs`](https://github.com/escalopa/campusswap/blob/main/research/forms/create_research_workspace.gs). Both answer into one spreadsheet, **CampusSwap — Research data**, which also has tabs for participants, interview notes (one idea per row) and usability tests. [`research/analyze_survey.py`](https://github.com/escalopa/campusswap/blob/main/research/analyze_survey.py) turns the CSV exports into a summary with counts, percentages and charts for the report.
+    - **What:** 4 tasks on the clickable hi-fi prototype, think-aloud, ease rated 1–7
+    - **See:** [Design → Usability testing](design.md#usability-testing)
 
 ## Recruiting criteria
 
@@ -54,20 +50,20 @@ The screener and survey are Google Forms created by [`research/forms/create_rese
 
 ## Key findings
 
-!!! warning "To fill after interviews"
-    This section will hold 2–3 key findings, each with a supporting participant quote and how many participants or respondents said it, plus a recommendation per finding.
+!!! warning "Waiting for real survey answers"
+    This section will hold 2–3 key findings with the share of respondents behind each, plus a recommendation per finding. Test entries are not reported as findings.
 
 | # | Finding | Evidence | Recommendation |
 |---|---|---|---|
-| 1 | *pending* | *quote + count* | *pending* |
-| 2 | *pending* | *quote + count* | *pending* |
-| 3 | *pending* | *quote + count* | *pending* |
+| 1 | *pending* | *% of respondents* | *pending* |
+| 2 | *pending* | *% of respondents* | *pending* |
+| 3 | *pending* | *% of respondents* | *pending* |
 
 ## Synthesis: from notes to features
 
 ```mermaid
 flowchart LR
-    N[Interview notes<br>one color per participant] --> T[Themes<br>affinity map]
+    N[Survey answers<br>+ competitor gaps] --> T[Themes<br>affinity map]
     T --> H[How might we…?<br>questions]
     H --> I[15 feature ideas]
     I --> P[Value vs complexity<br>matrix]
